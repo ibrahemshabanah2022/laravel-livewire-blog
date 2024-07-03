@@ -8,16 +8,12 @@ use Illuminate\Support\Str;
 
 class CreatePost extends Component
 {
-    public $title;
-    public $slug;
+
     public $content;
-    public $status = 'draft';
 
     protected $rules = [
-        'title' => 'required|string|max:255',
-        'slug' => 'required|string|max:255|unique:posts,slug',
+
         'content' => 'required|string',
-        'status' => 'required|in:draft,published',
     ];
 
     public function store()
@@ -26,16 +22,16 @@ class CreatePost extends Component
 
         Post::create([
             'user_id' => auth()->id(),
-            'title' => $this->title,
-            'slug' => Str::slug($this->title),
             'content' => $this->content,
-            'status' => $this->status,
+
+
         ]);
 
         session()->flash('message', 'Post successfully created.');
+        return redirect()->route('posts.index');
 
         // Reset form fields
-        $this->reset(['title', 'slug', 'content', 'status']);
+        $this->reset(['content']);
     }
 
     public function render()

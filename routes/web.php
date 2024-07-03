@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\CreatePost;
+use App\Livewire\PostIndex;
 
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -16,9 +17,11 @@ Route::view('profile', 'profile')
 
 
 
-Route::get('/posts/create', CreatePost::class)->name('posts.create');
+Route::get('/postscreate', CreatePost::class)->middleware(['auth'])->name('posts.create');
 
 
+
+Route::get('/', PostIndex::class)->name('posts.index');
 
 
 
