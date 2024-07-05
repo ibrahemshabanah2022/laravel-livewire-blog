@@ -12,7 +12,10 @@ class PostIndex extends Component
 
     public function render()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::with('user', 'comments') // Load user relationship
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return view('livewire.post-index', ['posts' => $posts]);
     }
 }

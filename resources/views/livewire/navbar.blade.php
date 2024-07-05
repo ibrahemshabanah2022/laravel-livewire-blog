@@ -1,20 +1,3 @@
-<?php
-
-use App\Livewire\Actions\Logout;
-use Livewire\Volt\Component;
-
-new class extends Component {
-    /**
-     * Log the current user out of the application.
-     */
-    public function logout(Logout $logout): void
-    {
-        $logout();
-
-        $this->redirect('/', navigate: true);
-    }
-}; ?>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         {{-- <a class="navbar-brand" href="#">Your Logo</a> --}}
@@ -25,6 +8,38 @@ new class extends Component {
         <div class="collapse navbar-collapse" id="navbarNav">
 
             <ul class="navbar-nav">
+
+                @auth
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{{ route('profile') }}">
+                            {{ __('Profile') }}
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">
+                            Log in
+                        </a>
+                    </li>
+
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a href="{{ route('register') }}" class="nav-link"> Register
+                            </a>
+                        </li>
+                    @endif
+                @endauth
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
                 </li>
@@ -32,16 +47,13 @@ new class extends Component {
 
                     <a class="nav-link" href="{{ route('posts.create') }}">Add Post</a>
                 </li>
-                <a href="{{ route('profile') }}">
-                    {{ __('Profile') }}
-                </a>
 
-                <!-- Authentication -->
-                <button wire:click="logout" class="w-full text-start">
-                    <a>
-                        {{ __('Log Out') }}
-                    </a>
-                    <!-- Add more menu items as needed -->
+
+
+                <!-- resources/views/layouts/app.blade.php or wherever your navbar is -->
+
+
+                <!-- Add more menu items as needed -->
             </ul>
         </div>
     </div>
