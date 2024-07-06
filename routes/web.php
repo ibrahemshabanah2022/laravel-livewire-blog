@@ -5,6 +5,7 @@ use App\Livewire\CreatePost;
 use App\Livewire\PostIndex;
 // routes/web.php
 use App\Livewire\UserProfile;
+use App\Livewire\UserPosts;
 
 use Illuminate\Support\Facades\Auth;
 // Route::view('/', 'welcome');
@@ -33,6 +34,8 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+
+Route::get('/user/posts', UserPosts::class)->name('user.posts')->middleware('auth');
 
 
 // Route::get('/users/{user}', UserProfile::class)->name('user.profile');

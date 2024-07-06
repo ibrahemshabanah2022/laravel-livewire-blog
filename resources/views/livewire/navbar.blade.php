@@ -21,6 +21,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.posts') }}">My Posts</a>
+                    </li>
+                    <li class="nav-item">
 
                         <a class="nav-link" href="{{ route('profile') }}">
                             {{ __('Profile') }}

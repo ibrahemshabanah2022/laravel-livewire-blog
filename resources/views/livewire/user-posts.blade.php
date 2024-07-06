@@ -1,9 +1,18 @@
+{{-- <div>
+    <h2>Your Posts</h2>
+    <ul>
+        @forelse ($posts as $post)
+            <li>{{ $post->content }} <small>{{ $post->created_at->diffForHumans() }}</small></li>
+        @empty
+            <li>No posts yet.</li>
+        @endforelse
+    </ul>
+</div> --}}
 <x-layouts.app>
-
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-
     @livewire('navbar')
 
+    <h1> My Posts</h1>
 
     <div class="container">
         <div class="row">
@@ -32,11 +41,6 @@
                                                         <small></small>
                                                     </span>
                                                     Posted From <small>{{ $post->created_at->diffForHumans() }}</small>
-                                                    <!-- Delete Post Button (only shown to post author or admin) -->
-                                                    @if (auth()->id() === $post->user_id)
-                                                        <button wire:click="deletePost({{ $post->id }})"
-                                                            onclick="confirm('Are you sure?')">Delete Post</button>
-                                                    @endif
                                                 </div>
                                                 <div class="card" style="border: none;">
                                                     <p>{{ \Illuminate\Support\Str::limit($post->content, 1000) }}</p>
@@ -58,16 +62,15 @@
                                                         @livewire('post-comments-component', ['post' => $post], key($post->id))
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </li>
                                     @endforeach
                                 </ul>
 
                                 <!-- end timeline -->
-                                <div class="mt-4">
+                                {{-- <div class="mt-4">
                                     {{ $posts->links('livewire::simple-bootstrap') }}
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- end #profile-post tab -->
                         </div>
@@ -78,5 +81,4 @@
             </div>
         </div>
     </div>
-
 </x-layouts.app>

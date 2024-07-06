@@ -3,6 +3,26 @@
         <br>
         @auth
             <button wire:click="setParent({{ $comment->id }})" class="btn btn-link">Reply</button>
+
+            @if (auth()->id() === $comment->user_id)
+                <button wire:click="deleteComment({{ $comment->id }})" onclick="confirm('Are you sure?')"
+                    class="btn btn-link">Delete</button>
+                <!-- Edit comment form -->
+                @if ($editCommentId === $comment->id)
+                    <form wire:submit.prevent="updateComment">
+                        <textarea wire:model="editContent"></textarea>
+                        @error('editContent')
+                            <span>{{ $message }}</span>
+                        @enderror
+                        <button type="submit" class="btn btn-link">Update</button>
+                        <button wire:click="editComment(null)" class="btn btn-link">Cancel</button>
+                    </form>
+                @else
+                    <!-- Edit button -->
+                    <button wire:click="editComment({{ $comment->id }})" class="btn btn-link">Edit</button>
+                @endif
+            @endif
+
         @endauth
     </p>
     @if ($parent_id === $comment->id)

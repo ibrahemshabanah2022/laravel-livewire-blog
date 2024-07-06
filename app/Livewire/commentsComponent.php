@@ -9,6 +9,7 @@ class commentsComponent extends Component
 {
     public $post;
 
+
     public function render()
     {
         $comments = Comment::where('post_id', $this->post->id)->get();

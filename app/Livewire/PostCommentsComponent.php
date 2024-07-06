@@ -12,7 +12,9 @@ class PostCommentsComponent extends Component
 
     public $post;
     public $content;
+    public $editContent;
     public $parent_id = null;
+    public $editCommentId = null;
     public $perPage = 5;
 
     public function mount($post)
@@ -49,6 +51,39 @@ class PostCommentsComponent extends Component
     {
         $this->parent_id = $commentId;
     }
+    public function editComment($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+        $this->editCommentId = $comment->id;
+        $this->editContent = $comment->content;
+    }
+
+    public function updateComment()
+    {
+        $this->validate([
+            'editContent' => 'required|max:255',
+        ]);
+
+        $comment = Comment::findOrFail($this->editCommentId);
+        $comment->content = $this->editContent;
+        $comment->save();
+
+        $this->editCommentId = null;
+        $this->editContent = '';
+
+        // Refresh the post to reflect the updated comment
+        $this->post->refresh();
+    }
+    public function deleteComment($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+        $comment->delete();
+
+
+        // Refresh the Livewire component to reflect the deleted comment
+        $this->post->refresh(); // Optionally refresh the post if necessary
+    }
+
 
     public function render()
     {
