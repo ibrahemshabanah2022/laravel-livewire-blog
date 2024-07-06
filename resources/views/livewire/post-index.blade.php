@@ -33,9 +33,14 @@
                                                     </span>
                                                     Posted From <small>{{ $post->created_at->diffForHumans() }}</small>
                                                     <!-- Delete Post Button (only shown to post author or admin) -->
+
+
+
                                                     @if (auth()->id() === $post->user_id)
-                                                        <button wire:click="deletePost({{ $post->id }})"
+                                                        <button class="btn btn-link"
+                                                            wire:click="deletePost({{ $post->id }})"
                                                             onclick="confirm('Are you sure?')">Delete Post</button>
+                                                        <a href="{{ route('posts.edit', $post->id) }}">Edit Post</a>
                                                     @endif
                                                 </div>
                                                 <div class="card" style="border: none;">

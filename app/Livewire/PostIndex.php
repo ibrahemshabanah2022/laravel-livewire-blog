@@ -29,6 +29,6 @@ class PostIndex extends Component
         session()->flash('message', 'Post deleted successfully.');
 
         // Refresh the Livewire component to reflect the updated list
-        $this->render();
+        return redirect()->route('posts.index');
     }
 }
