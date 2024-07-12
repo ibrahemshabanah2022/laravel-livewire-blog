@@ -1,25 +1,32 @@
 <div>
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
-
     @if ($isEditing)
         <form wire:submit.prevent="save">
-            <div class="form-group m-5">
-                <label for="content">Post Content</label>
-                <textarea id="content" class="form-control" wire:model="content" rows="8"></textarea>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea id="content" class="form-control" wire:model="content"></textarea>
                 @error('content')
-                    <span class="error">{{ $message }}</span>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+
+            <div class="form-group">
+                <label for="image">Current Image</label>
+                @if ($image)
+                    <div>
+                        <img src="{{ asset($image) }}" alt="Post Image" style="width: 100px; height: 100px;">
+                    </div>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label for="newImage">Upload New Image</label>
+                <input type="file" id="newImage" wire:model="newImage">
+                @error('newImage')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
-    @else
-        <div class="card m-5">
-            <p>{{ $content }}</p>
-            <button wire:click="edit" class="btn btn-secondary">Edit</button>
-        </div>
     @endif
 </div>

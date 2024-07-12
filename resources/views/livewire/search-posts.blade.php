@@ -1,11 +1,24 @@
 <div>
-    <input wire:model="searchTerm" type="text" placeholder="Search posts...">
-    <button wire:click="search">Search</button>
+    <div class="input-group mb-3">
+
+        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon"
+            wire:model="searchTerm" type="text" placeholder="Search posts...">
+        <button class="btn btn-outline-secondary" type="submit" wire:click="search">Search</button>
+
+    </div>
+
+
+
+
+
+
+
 
     @if (!empty($results))
         <ul>
             @foreach ($results as $post)
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">show
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target=".bd-example-modal-lg">show
                     post</button>
 
                 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
