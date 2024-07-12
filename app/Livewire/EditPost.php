@@ -9,7 +9,7 @@ class EditPost extends Component
 {
     public $postId;
     public $content;
-    public $isEditing = false;
+    public $isEditing = true;
 
     protected $rules = [
         'content' => 'required|string',
@@ -35,9 +35,10 @@ class EditPost extends Component
         $post->content = $this->content;
         $post->save();
 
-        $this->isEditing = false;
+        // $this->isEditing = false;
 
-        session()->flash('message', 'Post updated successfully.');
+        // session()->flash('message', 'Post updated successfully.');
+        return redirect()->route('posts.index');
     }
 
     public function render()

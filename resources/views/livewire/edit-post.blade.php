@@ -7,9 +7,9 @@
 
     @if ($isEditing)
         <form wire:submit.prevent="save">
-            <div class="form-group">
-                <label for="content">Content</label>
-                <textarea id="content" class="form-control" wire:model="content"></textarea>
+            <div class="form-group m-5">
+                <label for="content">Post Content</label>
+                <textarea id="content" class="form-control" wire:model="content" rows="8"></textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     @else
-        <div>
+        <div class="card m-5">
             <p>{{ $content }}</p>
             <button wire:click="edit" class="btn btn-secondary">Edit</button>
         </div>

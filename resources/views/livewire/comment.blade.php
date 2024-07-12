@@ -5,21 +5,25 @@
             <button wire:click="setParent({{ $comment->id }})" class="btn btn-link">Reply</button>
 
             @if (auth()->id() === $comment->user_id)
-                <button wire:click="deleteComment({{ $comment->id }})" onclick="confirm('Are you sure?')"
-                    class="btn btn-link">Delete</button>
+                <button wire:click="deleteComment({{ $comment->id }})" class="btn btn-link">Delete</button>
                 <!-- Edit comment form -->
+                <button wire:click="editComment({{ $comment->id }})" class="btn btn-link">Edit</button>
+
+
                 @if ($editCommentId === $comment->id)
                     <form wire:submit.prevent="updateComment">
-                        <textarea wire:model="editContent"></textarea>
-                        @error('editContent')
-                            <span>{{ $message }}</span>
-                        @enderror
-                        <button type="submit" class="btn btn-link">Update</button>
-                        <button wire:click="editComment(null)" class="btn btn-link">Cancel</button>
+                        <div class="input-group mb-3">
+
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Update</button>
+
+                            <input wire:model="editContent" type="text" class="form-control" placeholder=""
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+
+
                     </form>
                 @else
-                    <!-- Edit button -->
-                    <button wire:click="editComment({{ $comment->id }})" class="btn btn-link">Edit</button>
+                    <p style="display: none;">{{ $comment->content }}</p>
                 @endif
             @endif
 
@@ -27,11 +31,17 @@
     </p>
     @if ($parent_id === $comment->id)
         <form wire:submit.prevent="addComment">
-            <textarea wire:model="content"></textarea>
-            @error('content')
-                <span class="error">{{ $message }}</span>
-            @enderror
-            <button type="submit">Add Reply</button>
+            <div class="input-group mb-3">
+
+                <input wire:model="content" type="text" class="form-control" placeholder="Add your reply..."
+                    aria-label="Example text with button addon"> @error('content')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+                <button class="btn btn-outline-secondary" type="submit">Add Reply</button>
+                <button class="btn btn-outline-secondary" type="button" wire:click="cancelreply">Cancel</button>
+            </div>
+
+
         </form>
     @endif
 

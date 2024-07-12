@@ -31,5 +31,9 @@
             @enderror
             <button class="btn btn-primary" type="submit">Add Comment</button>
         </form>
-    @endauth
+    @else
+        <a href="{{ route('login') }}" class="nav-link">
+            Login to add comment
+    </a> @endauth
+
 </div>

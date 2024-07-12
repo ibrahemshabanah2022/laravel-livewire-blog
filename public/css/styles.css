@@ -1,6 +1,6 @@
 body {
     margin-top: 20px;
-    background: #eee;
+    background: rgb(255, 255, 255);
 }
 
 .profile-header {
@@ -536,6 +536,7 @@ select.form-control:not([size]):not([multiple]) {
     padding-bottom: 10px;
     border-bottom: 1px solid #e2e7eb;
     line-height: 30px;
+    
 }
 
 .timeline-header .userimage {

@@ -51,6 +51,7 @@
                     <a class="nav-link" href="{{ route('posts.create') }}">Add Post</a>
                 </li>
 
+                <livewire:search-posts />
 
 
                 <!-- resources/views/layouts/app.blade.php or wherever your navbar is -->

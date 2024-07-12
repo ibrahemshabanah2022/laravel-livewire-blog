@@ -33,22 +33,52 @@
 
 
 
+
+
+
                                             <div class="timeline-comment-box">
 
                                                 <div class="input">
-                                                    <form wire:submit.prevent="store">
+                                                    <!-- resources/views/posts/create.blade.php -->
+
+                                                    <form action="{{ route('posts.store') }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div>
+                                                            <textarea name="content" rows="4" cols="50" placeholder="Enter your post content"></textarea>
+                                                            @error('content')
+                                                                <span>{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div>
+                                                            <input type="file" name="image">
+                                                            @error('image')
+                                                                <span>{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div>
+                                                            <button type="submit">Create Post</button>
+                                                        </div>
+                                                    </form>
+
+                                                    {{-- <form wire:submit.prevent="store">
                                                         <div class="input-group">
 
                                                             <textarea placeholder="Write a post..." class="form-control rounded-corner" id="content" wire:model="content"></textarea>
                                                             @error('content')
                                                                 <span class="error">{{ $message }}</span>
                                                             @enderror
+                                                            <div>
+                                                                <input type="file" wire:model="image">
 
+                                                            </div>
                                                             <button class="btn btn-primary f-s-12 rounded-corner"
                                                                 type="submit">Add Post</button>
 
                                                         </div>
-                                                    </form>
+                                                    </form> --}}
                                                 </div>
                                             </div>
                                         </div>

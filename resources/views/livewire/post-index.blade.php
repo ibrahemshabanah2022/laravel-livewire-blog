@@ -29,6 +29,7 @@
                                                             alt=""></span>
                                                     <span class="username">
                                                         <a href="">{{ $post->user->name }}</a>
+
                                                         <small></small>
                                                     </span>
                                                     Posted From <small>{{ $post->created_at->diffForHumans() }}</small>
@@ -44,6 +45,10 @@
                                                     @endif
                                                 </div>
                                                 <div class="card" style="border: none;">
+                                                    @if ($post->image)
+                                                        <img src="{{ asset($post->image) }}" class="card-img-top"
+                                                            alt="Post Image" style="width: 50%; height: 50%;">
+                                                    @endif
                                                     <p>{{ \Illuminate\Support\Str::limit($post->content, 1000) }}</p>
                                                 </div>
                                                 <div class="timeline-likes">
@@ -60,6 +65,7 @@
                                                 </div>
                                                 <div class="timeline-comment-box">
                                                     <div class="input">
+                                                        Comments
                                                         @livewire('post-comments-component', ['post' => $post], key($post->id))
                                                     </div>
                                                 </div>
