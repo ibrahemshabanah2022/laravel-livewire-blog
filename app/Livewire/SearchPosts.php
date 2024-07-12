@@ -3,12 +3,10 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Post;
 
 class SearchPosts extends Component
 {
     public $searchTerm;
-    public $results;
 
     public function mount()
     {
@@ -18,19 +16,19 @@ class SearchPosts extends Component
     public function initialize()
     {
         $this->searchTerm = '';
-        $this->results = [];
     }
 
     public function search()
     {
         $this->validate([
-            'searchTerm' => 'required|min:3',
+            'searchTerm' => 'required|min:1',
         ]);
 
-        $this->results = Post::where('content', 'like', '%' . $this->searchTerm . '%')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // Redirect to the results page with the search term
+        return redirect()->route('search.results', ['searchTerm' => $this->searchTerm]);
     }
+
+
 
     public function render()
     {

@@ -8,6 +8,7 @@ use App\Livewire\UserProfile;
 use App\Livewire\UserPosts;
 use App\Livewire\EditPost;
 use App\Livewire\SearchPosts;
+use App\Livewire\SearchResults;
 
 use Illuminate\Support\Facades\Auth;
 // Route::view('/', 'welcome');
@@ -43,10 +44,20 @@ Route::get('/user/posts', UserPosts::class)->name('user.posts')->middleware('aut
 Route::get('/posts/{postId}/edit', EditPost::class)->name('posts.edit');
 
 
-Route::get('/posts/search', SearchPosts::class)->name('posts.search');
+// Route::get('/posts/search', SearchPosts::class)->name('posts.search');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::post('/posts', [CreatePost::class, 'store'])->name('posts.store');
+
+
+
+
+
+Route::get('/search', SearchPosts::class)->name('search');
+Route::get('/search/results/{searchTerm}', SearchResults::class)->name('search.results');
+
+
+
 
 
 require __DIR__ . '/auth.php';

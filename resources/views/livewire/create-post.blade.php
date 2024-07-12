@@ -52,6 +52,7 @@
                                                         </div>
 
                                                         <div>
+                                                            upload image
                                                             <input type="file" name="image">
                                                             @error('image')
                                                                 <span>{{ $message }}</span>
