@@ -8,12 +8,13 @@
             @foreach ($comments as $comment)
                 @include('livewire.comment', ['comment' => $comment, 'post' => $post])
             @endforeach
+            <div x-intersect="$wire.loadMore()"></div>
 
-            @if ($comments->hasMorePages())
+            {{-- @if ($comments->hasMorePages())
                 <div class="text-center">
                     <button wire:click="loadMore" class="btn btn-primary">Load More comments</button>
                 </div>
-            @endif
+            @endif --}}
         </div>
 
 
